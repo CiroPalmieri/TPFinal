@@ -1,0 +1,27 @@
+﻿@using Sk8ARG.Models
+@model Hardware
+@{
+    ViewBag.Title = "ABMS";
+}
+<h2>ABMSkatePark</h2>
+@Html.ActionLink("Ingresar nuevo hardware", "ingresar", "BackOffice", new { accion = "Ingresar" }, null)
+<table>
+    @foreach (Hardware hw in ViewBag.Lhw)
+    {
+        <tr>
+            @if (hw.Dest)
+            {
+                <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+            }
+            else
+            {
+                <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
+            }
+            <td><img src="~/Content/images/@hw.Foto" width="199" height="99" /></td>
+            <td id="a2">@hw.Nombre</td>
+            <td id="a1">@ViewBag.dest</td>
+            <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idHw= hw.IdHW})'>X</a></td>
+            <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idHw = hw.IdHW, accion = "Editar" })'>Editar</a></td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,27 @@
+﻿@using Sk8ARG.Models
+@model Ropa
+@{
+    ViewBag.Title = "ABMS";
+}
+<h2>ABMSkatePark</h2>
+@Html.ActionLink("Ingresar nueva ropa", "ingresar", "BackOffice", new { accion = "Ingresar" }, null)
+<table>
+    @foreach (Ropa rp in ViewBag.Lr)
+    {
+        <tr>
+            @if (rp.Dest)
+            {
+                <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+            }
+            else
+            {
+                <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
+            }
+            <td><img src="~/Content/images/@rp.Foto" width="199" height="99" /></td>
+            <td id="a2">@rp.Nombre</td>
+            <td id="a1">@ViewBag.dest</td>
+            <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idRopa = rp.IdRopa})'>X</a></td>
+            <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idRopa = rp.IdRopa, accion = "Editar" })'>Editar</a></td>
+        </tr>
+    }
+</table>

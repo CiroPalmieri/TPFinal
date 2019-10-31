@@ -199,6 +199,8 @@
     <Content Include="Views\BackOffice\Index.cshtml" />
     <Content Include="Views\BackOffice\ABMS.cshtml" />
     <Content Include="Views\BackOffice\ABM.cshtml" />
+    <Content Include="Views\BackOffice\ABMR.cshtml" />
+    <Content Include="Views\BackOffice\ABMH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

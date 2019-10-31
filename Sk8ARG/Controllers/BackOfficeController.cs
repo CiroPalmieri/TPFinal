@@ -26,17 +26,19 @@ namespace Sk8ARG.Controllers
                     {
                         List<SkateParks> lstskp = BD.ListarSkateParks();
                         ViewBag.Lskp = lstskp;
-                        return View();                       
+                        return View("ABMS");                       
                     }
                 case 2:
                     {
-                        
-                        break;
+                        List<Ropa> lstropa= BD.ListarRopa();
+                        ViewBag.Lr = lstropa;
+                        return View("ABMR");
                     }
                 case 3:
                     {
-                       
-                        break;                     
+                        List<Hardware> lsthw = BD.ListarHardware();
+                        ViewBag.Lhw = lsthw;
+                        return View("ABMH");
                     }
             }
             return View();
