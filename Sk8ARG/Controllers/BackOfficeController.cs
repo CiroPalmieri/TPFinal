@@ -19,26 +19,26 @@ namespace Sk8ARG.Controllers
             List<SkateParks> skateParks = new List<SkateParks>();
             //List<Ropa> Ropa = new List<Ropa>();
             //List<Hardware> Hardware = new List<Hardware>();
+            ViewBag.Choice = a;
             switch (a)
             {
                 case 1:
                     {
-                        skateParks = BD.ListarSkateParks();
-                        ViewBag.LSkp = skateParks;
-                        break;
+                        List<SkateParks> lstskp = BD.ListarSkateParks();
+                        ViewBag.Lskp = lstskp;
+                        return View();                       
                     }
                 case 2:
                     {
-
+                        
                         break;
                     }
                 case 3:
                     {
-
-                        break;
+                       
+                        break;                     
                     }
             }
-
             return View();
         }
         public ActionResult ABM()
@@ -51,6 +51,7 @@ namespace Sk8ARG.Controllers
 
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(Usuarios us)
         {

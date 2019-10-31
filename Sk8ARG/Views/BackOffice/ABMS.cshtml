@@ -3,34 +3,25 @@
 @{
     ViewBag.Title = "ABMS";
 }
-
+<h2>ABMSkatePark</h2>
 @Html.ActionLink("Ingresar nuevo SKP", "ingresar", "BackOffice", new { accion = "Ingresar" }, null)
 <table>
-    @foreach (SkateParks SKP in ViewBag.LSkp)
+    @foreach (SkateParks SKP in ViewBag.Lskp)
     {
-        if (SKP.Destacado)
+    <tr>
+        @if (SKP.Destacado)
         {
-            ViewBag.dest = "Está destacado";
+            <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
         }
         else
         {
-            ViewBag.dest = "No está destacada";
+            <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
         }
-        <tr>
-            <td><img src="~/Content/@SKP.Imagen" width="199" height="99" /></td>
-            <td id="a2">@SKP.Nombre</td>
-            <td id="a1">@ViewBag.dest</td>
-            @if (SKP.Destacado)
-            {
-                <td id="a1"><img src="~/Content/yadestacada.jpg" width="199" height="99" /></td>
-            }
-            else
-            {
-                <td id="a1"><a href='@Url.Action("Destacar", "Backoffice", new { idSKP = SKP.IdSkatePark})'><img src="~/Content/destacar.jpg" width="199" height="99" /></a></td>
-            }
-            <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idSKP = SKP.IdSkatePark })'>X</a></td>
-            <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion="Editar" })'>Editar</a></td>
-        </tr>
+        <td><img src="~/Content/images/@SKP.Imagen" width="199" height="99" /></td>
+        <td id="a2">@SKP.Nombre</td>
+        <td id="a1">@ViewBag.dest</td>       
+        <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idSKP = SKP.IdSkatePark })'>X</a></td>
+        <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion = "Editar" })'>Editar</a></td>
+    </tr>
     }
 </table>
-<h2>ABMSkatePark</h2>
