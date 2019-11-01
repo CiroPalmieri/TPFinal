@@ -1,5 +1,7 @@
 ﻿@using Sk8ARG.Models
 @model SkateParks
+<link rel="stylesheet" type="text/css" href="~/Content/EstilosABM.css" />
+
 @{
     ViewBag.Title = "ABMS";
 }
@@ -8,20 +10,26 @@
 <table>
     @foreach (SkateParks SKP in ViewBag.Lskp)
     {
-    <tr>
-        @if (SKP.Destacado)
-        {
-            <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
-        }
-        else
-        {
-            <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
-        }
-        <td><img src="~/Content/images/@SKP.Imagen" width="199" height="99" /></td>
-        <td id="a2">@SKP.Nombre</td>
-        <td id="a1">@ViewBag.dest</td>       
-        <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idSKP = SKP.IdSkatePark })'>X</a></td>
-        <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion = "Editar" })'>Editar</a></td>
-    </tr>
+        <tr>
+            <th>Nombre</th>
+            <th>Foto</th>
+            <th>Destacar</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        <tr>
+            <td id="a2">@SKP.Nombre</td>
+            <td><img src="~/Content/images/@SKP.Imagen" width="199" height="99" /></td>
+            @if (SKP.Destacado)
+            {
+                <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+            }
+            else
+            {
+                <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
+            }
+            <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idSKP = SKP.IdSkatePark })'>X</a></td>
+            <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion = "Editar" })'>Editar</a></td>
+        </tr>
     }
 </table>

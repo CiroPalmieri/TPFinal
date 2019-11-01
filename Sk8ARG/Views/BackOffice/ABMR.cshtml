@@ -1,5 +1,7 @@
 ﻿@using Sk8ARG.Models
 @model Ropa
+<link rel="stylesheet" type="text/css" href="~/Content/EstilosABM.css" />
+
 @{
     ViewBag.Title = "ABMS";
 }
@@ -9,19 +11,27 @@
     @foreach (Ropa rp in ViewBag.Lr)
     {
         <tr>
+            <th>Nombre</th>
+            <th>Foto</th>
+            <th>Destacar</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        <tr>
+            <td id="a2">@rp.Nombre</td>
+            <td><img src="~/Content/images/@rp.Foto" width="199" height="99" /></td>
             @if (rp.Dest)
             {
-                <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+                <td ><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
             }
             else
             {
-                <td id="a1"><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
+                <td ><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
             }
-            <td><img src="~/Content/images/@rp.Foto" width="199" height="99" /></td>
-            <td id="a2">@rp.Nombre</td>
-            <td id="a1">@ViewBag.dest</td>
-            <td id="a1"><a href='@Url.Action("eliminar", "Backoffice", new { idRopa = rp.IdRopa})'>X</a></td>
-            <td id="a1"><a href='@Url.Action("editar", "Backoffice", new { idRopa = rp.IdRopa, accion = "Editar" })'>Editar</a></td>
+
+            
+            <td ><a href='@Url.Action("eliminar", "Backoffice", new { idRopa = rp.IdRopa})'>X</a></td>
+            <td ><a href='@Url.Action("editar", "Backoffice", new { idRopa = rp.IdRopa, accion = "Editar" })'>Editar</a></td>
         </tr>
     }
 </table>
