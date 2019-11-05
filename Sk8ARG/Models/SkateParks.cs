@@ -10,13 +10,15 @@ namespace Sk8ARG.Models
         private int _idSkatePark;
         private string _Nombre;
         private string _Imagen;
+        private HttpPostedFileBase _ArchivoImagen;
         private string _Desc;
         private bool _Destacado;
         private string _Ubic;
 
         public int IdSkatePark { get => _idSkatePark; set => _idSkatePark = value; }
         public string Nombre { get => _Nombre; set => _Nombre = value; }
-        public string Imagen { get => _Imagen; set => _Imagen = value; }
+        public string Imagen { get => _Imagen; set => _Imagen = value; }    
+        public HttpPostedFileBase ArchivoImagen { get => _ArchivoImagen; set => _ArchivoImagen = value; }
         public string Desc { get => _Desc; set => _Desc = value; }
         public bool Destacado { get => _Destacado; set => _Destacado = value; }
         public string Ubic { get => _Ubic; set => _Ubic = value; }

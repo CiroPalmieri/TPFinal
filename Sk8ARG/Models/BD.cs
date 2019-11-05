@@ -56,8 +56,33 @@ namespace Sk8ARG.Models
 
             Desconectar(Conn);
             return ListaSkateParks;
-
         }
+        public static SkateParks TraerSKP(int idSKP)
+        {
+            SkateParks SKP = new SkateParks();
+            SqlConnection conn = Conectar();
+            SqlCommand consulta = conn.CreateCommand();
+            consulta.CommandText = "SELECT * FROM Skateparks where IdSkatePark = " + idSKP;
+            consulta.CommandType = System.Data.CommandType.Text;
+            SqlDataReader lector = consulta.ExecuteReader();
+
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    int IdSkatePark = Convert.ToInt32(lector["IdSkatePark"]);
+                    string Nombre = lector["Nombre"].ToString();
+                    string Ubicacion = lector["Ubicacion"].ToString();
+                    string Descripcion = lector["Descripcion"].ToString();
+                    string Imagen = lector["Foto"].ToString();
+                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"]);
+                    SKP = new SkateParks(IdSkatePark, Nombre, Ubicacion, Descripcion,Destacada, Imagen);
+                }
+            }
+            Desconectar(conn);
+            return SKP;
+        }
+
         public static List<Ropa> ListarRopa()
         {
             List<Ropa> ListaRopa = new List<Ropa>();
@@ -104,7 +129,37 @@ namespace Sk8ARG.Models
 
             Desconectar(Conn);
             return ListaHW;
+        }
+        public static void InsertarSKP(SkateParks MiSKP)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "INSERT into Skateparks(IdSkatePark,Nombre,Ubicacion,Descripcion,Foto,Destacado) VALUES('" + MiSKP.IdSkatePark+ "','" + MiSKP.Nombre + "','" + MiSKP.Ubic+ "','" + MiSKP.Desc + "'," + MiSKP.Imagen + "," + MiSKP.Destacado + ")";
+            Consulta.ExecuteNonQuery();
+        }
+        public static void EditarSKP(SkateParks MiSKP)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
 
+            string SQL = "UPDATE Skateparks SET ";
+            SQL += "Nombre = '" + MiSKP.Nombre+ "',";
+            SQL += "Descripcion= '" + MiSKP.Desc + "'WHERE IdSkatePark = " MiSKP.IdSkatePark;
+           ;
+
+            Consulta.CommandText = SQL;
+            Consulta.ExecuteNonQuery();
+        }
+        public static void EliminarNot(int IdSKP)
+        {
+            SkateParks SKP = new SkateParks();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "DELETE  from Skateparks where IdSkatepark= " + IdSKP+ "";
+            Consulta.ExecuteNonQuery();
         }
     }
 }

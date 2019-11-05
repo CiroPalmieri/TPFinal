@@ -1,0 +1,17 @@
+﻿@using Sk8ARG.Models
+@model SkateParks
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+
+@using (Html.BeginForm("grabar", "Backoffice", new { accion = ViewBag.Accion }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+ {
+    @Html.HiddenFor(model => model.IdSkatePark)
+    @Html.HiddenFor(model => model.Imagen)
+    <p>Nombre</p> @Html.TextBoxFor(model => model.Nombre) <br />
+    <p>Imagen:</p>@Html.TextBoxFor(model => model.ArchivoImagen, new { type = "file" })
+    <p>Descripcion:</p> @Html.TextBoxFor(model => model.Desc) <br />
+    <input type="submit" value="Guardar Cambios" />
+ }

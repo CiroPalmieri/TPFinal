@@ -26,11 +26,11 @@ namespace Sk8ARG.Controllers
                     {
                         List<SkateParks> lstskp = BD.ListarSkateParks();
                         ViewBag.Lskp = lstskp;
-                        return View("ABMS");                       
+                        return View("ABMS");
                     }
                 case 2:
                     {
-                        List<Ropa> lstropa= BD.ListarRopa();
+                        List<Ropa> lstropa = BD.ListarRopa();
                         ViewBag.Lr = lstropa;
                         return View("ABMR");
                     }
@@ -43,17 +43,12 @@ namespace Sk8ARG.Controllers
             }
             return View();
         }
+        
         public ActionResult ABM()
         {
-
             return View();
         }
-        public ActionResult mb()
-        {
-
-            return View();
-        }
-
+       
         [HttpPost]
         public ActionResult Login(Usuarios us)
         {
@@ -74,6 +69,49 @@ namespace Sk8ARG.Controllers
                 return View("ABM");
             }
         }
-    }
+        public ActionResult ingresar(string accion)
+        {
+            SkateParks SKP = new SkateParks();
+            ViewBag.Accion = accion;
+            return View("Editar", SKP);
+        }
+        public ActionResult Editar(int idSKP, string accion)
+        {
+            SkateParks SKP = BD.TraerSKP(idSKP);
+            ViewBag.nombreImagen = SKP.Imagen;
+            ViewBag.Accion = accion;
+            return View("Edición", SKP);
+        }
 
+        [HttpPost]
+        public ActionResult grabar(SkateParks SKP, string accion)
+        {
+            if (accion == "Editar")
+            {
+                if (SKP.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/") + SKP.ArchivoImagen.FileName;
+                    SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    SKP.Imagen = SKP.ArchivoImagen.FileName;
+                }
+
+                BD.EditarSKP(SKP);
+                List<SkateParks> lstNoticias = BD.ListarSkateParks();
+                ViewBag.Noticias = lstNoticias;
+            }
+            else
+            {
+                if (SKP.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/") + SKP.ArchivoImagen.FileName;
+                    SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    SKP.Imagen = SKP.ArchivoImagen.FileName;
+                }
+                BD.InsertarSKP(SKP);
+                List<SkateParks> lstSKPS = BD.ListarSkateParks();
+                ViewBag.skps = lstSKPS;
+            }
+            return View("ABMS");
+        }
+    }
 }
