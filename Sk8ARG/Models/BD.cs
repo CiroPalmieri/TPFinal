@@ -146,7 +146,7 @@ namespace Sk8ARG.Models
 
             string SQL = "UPDATE Skateparks SET ";
             SQL += "Nombre = '" + MiSKP.Nombre+ "',";
-            SQL += "Descripcion= '" + MiSKP.Desc + "'WHERE IdSkatePark = " MiSKP.IdSkatePark;
+            SQL += "Descripcion= '" + MiSKP.Desc + "'WHERE IdSkatePark = " MiSKP.IdSkateParks;
            ;
 
             Consulta.CommandText = SQL;
