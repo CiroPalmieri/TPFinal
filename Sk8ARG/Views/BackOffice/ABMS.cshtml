@@ -23,19 +23,23 @@
             <td><img src="~/Content/images/@SKP.Imagen" width="199" height="99" /></td>
             @if (SKP.Destacado)
             {
-                <td id="a1"><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+                <td id="a1"> 
+                    <div class="ph-float">
+                         <p href='' class='ph-button ph-btn-pink'>Ya destacada</p>
+                    </div> 
+                </td>
             }
             else
             {
                 <td id="a1">
                     <div class="ph-float">
-                        <a href='@Url.Action("destacar", "Backoffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-green'>Destacar</a>
+                        <a href='@Url.Action("Destacar", "Backoffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-green'>Destacar</a>
                     </div>
                 </td>
             }
             <td id="a1">
                         <div class="ph-float">
-                            <a href='@Url.Action("Eliminar", "Backoffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-red'>Delete</a>
+                            <a href='@Url.Action("Eliminar", "BackOffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-red'>Borrar</a>
                         </div>
                     </td>
             <td id="a1"> 

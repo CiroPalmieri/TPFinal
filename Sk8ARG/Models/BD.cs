@@ -146,20 +146,33 @@ namespace Sk8ARG.Models
 
             string SQL = "UPDATE Skateparks SET ";
             SQL += "Nombre = '" + MiSKP.Nombre+ "', Foto='"+MiSKP.Imagen+"', ";
-            SQL += "Descripcion= '" + MiSKP.Desc + "' WHERE IdSkatePark = "+ MiSKP.IdSkatePark;
-           ;
-
+            SQL += "Descripcion= '" + MiSKP.Desc + "' WHERE IdSkatePark = "+ MiSKP.IdSkatePark;           
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
-        public static void EliminarSKP(int IdSKP)
+        public static void EliminarSKP(int idSKP)
         {
             SkateParks SKP = new SkateParks();
             SqlConnection Conn = Conectar();
             SqlCommand Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
-            Consulta.CommandText = "DELETE  from Skateparks where IdSkatepark= " + IdSKP+ "";
+            Consulta.CommandText = "DELETE  from Skateparks where IdSkatepark= " + idSKP+ "";
             Consulta.ExecuteNonQuery();
+        }
+        public static void Destacar(int idSKP)
+        {
+            SkateParks skpDestacado = new SkateParks();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Skateparks set Destacado = 0 where Destacado = 1";
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Close();
+            Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Skateparks set Destacado = 1 where  IdSkatePark = " + idSKP;
+            Lector = Consulta.ExecuteReader();
+            Desconectar(Conn);
         }
     }
 }

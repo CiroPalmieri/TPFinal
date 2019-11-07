@@ -67,6 +67,7 @@ namespace Sk8ARG.Controllers
                 Dou = BD.ListarSkateParks();
                 ViewBag.Dou = Dou;
                 return View("ABM");
+                
             }
         }
         public ActionResult ingresar(string accion)
@@ -82,7 +83,6 @@ namespace Sk8ARG.Controllers
             ViewBag.Accion = accion;
             return View("Edición", SKP);
         }
-
         [HttpPost]
         public ActionResult grabar(SkateParks SKP, string accion)
         {
@@ -111,16 +111,19 @@ namespace Sk8ARG.Controllers
                 List<SkateParks> lstSKPS = BD.ListarSkateParks();
                 ViewBag.skps = lstSKPS;
             }
-            return View("ABMS");
+            return RedirectToAction("ABMS", new { a = 1 });
         }
-        public ActionResult Eliminar(int a)
+        public ActionResult Eliminar(int idSKP)
+        {
+            BD.EliminarSKP(idSKP);
+            return RedirectToAction("ABMS", new { a = 1 });
+        }
+        public ActionResult Destacar(int idSKP)
         {
             SkateParks b = new SkateParks();
-            b = BD.TraerSKP(a);
-            BD.EliminarSKP(a);
-            ViewBag.Nom = b.Nombre;
-            ViewBag.Im = b.Imagen;
-            return View("ABMS");
+            BD.Destacar(idSKP);
+            b = BD.TraerSKP(idSKP);          
+            return RedirectToAction("ABMS", new { a = 1 });
         }
     }
 }
