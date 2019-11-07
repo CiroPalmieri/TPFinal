@@ -79,7 +79,7 @@ namespace Sk8ARG.Controllers
         public ActionResult Editar(int idSKP, string accion)
         {
             SkateParks SKP = BD.TraerSKP(idSKP);
-            ViewBag.nombreImagen = SKP.Imagen;
+            ViewBag.Foto= SKP.Imagen;
             ViewBag.Accion = accion;
             return View("Edición", SKP);
         }
@@ -94,7 +94,7 @@ namespace Sk8ARG.Controllers
                     SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
                     SKP.Imagen = SKP.ArchivoImagen.FileName;
                 }
-
+              
                 BD.EditarSKP(SKP);
                 List<SkateParks> lstSKP = BD.ListarSkateParks();
                 ViewBag.Lskp = lstSKP;

@@ -1,18 +1,52 @@
-﻿@using Sk8ARG.Models
+﻿@using Sk8ARG.Models;
 @model SkateParks
 
-@{
-    ViewBag.Title = "Editar";
-}
+<link rel="stylesheet" type="text/css" href="~/Content/Edit.css" />
 
+    <div class="container bootstrap snippets">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9">
+                @using (Html.BeginForm("grabar", "BackOffice", new { accion = ViewBag.accion }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(model => model.IdSkatePark)
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <img src="~/Content/images/@ViewBag.Foto" alt="Foto Skatepark" height="199" width="299">
+                            @Html.TextBoxFor(model => model.ArchivoImagen, new { type = "file" })
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Editar SkatePark</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
 
-@using (Html.BeginForm("grabar", "Backoffice", new { accion = ViewBag.Accion }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.HiddenFor(model => model.IdSkatePark)
-    @Html.HiddenFor(model => model.Imagen)
-    <p>Nombre</p> @Html.TextBoxFor(model => model.Nombre) <br />
-    <p>Imagen:</p>@Html.TextBoxFor(model => model.ArchivoImagen, new { type = "file" })
-    <p>Descripcion:</p> @Html.TextBoxFor(model => model.Desc) <br />
-    <p>Ubicación:</p> @Html.TextBoxFor(model => model.Ubic) <br />
-    <input type="submit" value="Guardar Cambios" />
-}
+                            <label class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Descripcion</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Desc, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ubicacion</label>
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(model => model.Ubic, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <div class="container-login100-form-btn">
+                            <input type="submit" value="Grabar" class="btn blue" />
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>

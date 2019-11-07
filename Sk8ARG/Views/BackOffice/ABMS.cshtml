@@ -7,7 +7,10 @@
     ViewBag.Title = "ABMS";
 }
 <h2>ABMSkatePark</h2>
-@Html.ActionLink("Ingresar nuevo SKP", "ingresar", "BackOffice", new { accion = "Ingresar" }, null)
+<div class="ph-float">
+    <a href='@Url.Action("ingresar", "Backoffice", new {accion = "Ingresar" })'class='ph-button ph-btn-green'>Ingresar nuevo skatepark</a>
+</div>
+
 <table>
     @foreach (SkateParks SKP in ViewBag.Lskp)
     {
@@ -23,10 +26,10 @@
             <td><img src="~/Content/images/@SKP.Imagen" width="199" height="99" /></td>
             @if (SKP.Destacado)
             {
-                <td id="a1"> 
+                <td id="a1">
                     <div class="ph-float">
-                         <p href='' class='ph-button ph-btn-pink'>Ya destacada</p>
-                    </div> 
+                        <p href='' class='ph-button ph-btn-pink'>Ya destacada</p>
+                    </div>
                 </td>
             }
             else
@@ -38,14 +41,14 @@
                 </td>
             }
             <td id="a1">
-                        <div class="ph-float">
-                            <a href='@Url.Action("Eliminar", "BackOffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-red'>Borrar</a>
-                        </div>
-                    </td>
-            <td id="a1"> 
+                <div class="ph-float">
+                    <a href='@Url.Action("Eliminar", "BackOffice", new { idSKP = SKP.IdSkatePark })' class='ph-button ph-btn-red'>Borrar</a>
+                </div>
+            </td>
+            <td id="a1">
                 <div id="asd" class="ph-container">
                     <div class="ph-float">
-                        <a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion = "Editar"})'class='ph-button ph-btn-blue'>Editar</a>
+                        <a href='@Url.Action("editar", "Backoffice", new { idSKP = SKP.IdSkatePark, accion = "Editar"})' class='ph-button ph-btn-blue'>Editar</a>
                     </div>
                 </div>
                 <div class="ph-clear"></div>

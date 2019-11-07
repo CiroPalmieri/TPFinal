@@ -75,7 +75,7 @@ namespace Sk8ARG.Models
                     string Ubicacion = lector["Ubicacion"].ToString();
                     string Descripcion = lector["Descripcion"].ToString();
                     string Imagen = lector["Foto"].ToString();
-                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"]);
+                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
                     SKP = new SkateParks(IdSkatePark, Nombre, Imagen, Descripcion,Destacada, Ubicacion );
                 }
             }
@@ -145,8 +145,7 @@ namespace Sk8ARG.Models
             Consulta.CommandType = System.Data.CommandType.Text;
 
             string SQL = "UPDATE Skateparks SET ";
-            SQL += "Nombre = '" + MiSKP.Nombre+ "', Foto='"+MiSKP.Imagen+"', ";
-            SQL += "Descripcion= '" + MiSKP.Desc + "' WHERE IdSkatePark = "+ MiSKP.IdSkatePark;           
+            SQL += "Nombre = '" + MiSKP.Nombre+ "', Foto='" +MiSKP.Imagen+"', " + "Descripcion= '" + MiSKP.Desc + "' WHERE IdSkatePark = " + MiSKP.IdSkatePark;           
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
