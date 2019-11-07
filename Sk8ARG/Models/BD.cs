@@ -76,7 +76,7 @@ namespace Sk8ARG.Models
                     string Descripcion = lector["Descripcion"].ToString();
                     string Imagen = lector["Foto"].ToString();
                     Boolean Destacada = Convert.ToBoolean(lector["Destacado"]);
-                    SKP = new SkateParks(IdSkatePark, Nombre, Ubicacion, Descripcion,Destacada, Imagen);
+                    SKP = new SkateParks(IdSkatePark, Nombre, Imagen, Descripcion,Destacada, Ubicacion );
                 }
             }
             Desconectar(conn);
