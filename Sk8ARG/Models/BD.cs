@@ -48,7 +48,7 @@ namespace Sk8ARG.Models
                 string Ub = (Lector["Ubicacion"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
-                bool Dest = Convert.ToBoolean(Lector["Destacado"]);
+                Boolean Dest = Convert.ToBoolean(Lector["Destacado"] is DBNull ? 0 : Lector["Destacado"]);
 
                 SkateParks miSkateParks = new SkateParks(IdSKP, Nom, Foto, Desc, Dest, Ub);
                 ListaSkateParks.Add(miSkateParks);
@@ -135,7 +135,7 @@ namespace Sk8ARG.Models
             SqlConnection Conn = Conectar();
             SqlCommand Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
-            Consulta.CommandText = "INSERT into Skateparks(IdSkatePark,Nombre,Ubicacion,Descripcion,Foto,Destacado) VALUES('" + MiSKP.IdSkatePark+ "','" + MiSKP.Nombre + "','" + MiSKP.Ubic+ "','" + MiSKP.Desc + "'," + MiSKP.Imagen + "," + MiSKP.Destacado + ")";
+            Consulta.CommandText = "INSERT into Skateparks(Nombre,Ubicacion,Descripcion,Foto) VALUES('" + MiSKP.Nombre + "','" + MiSKP.Ubic+ "','" + MiSKP.Desc + "','" + MiSKP.Imagen +"')";
             Consulta.ExecuteNonQuery();
         }
         public static void EditarSKP(SkateParks MiSKP)
@@ -145,14 +145,14 @@ namespace Sk8ARG.Models
             Consulta.CommandType = System.Data.CommandType.Text;
 
             string SQL = "UPDATE Skateparks SET ";
-            SQL += "Nombre = '" + MiSKP.Nombre+ "',";
-            SQL += "Descripcion= '" + MiSKP.Desc + "'WHERE IdSkatePark = " MiSKP.IdSkateParks;
+            SQL += "Nombre = '" + MiSKP.Nombre+ "', Foto='"+MiSKP.Imagen+"', ";
+            SQL += "Descripcion= '" + MiSKP.Desc + "' WHERE IdSkatePark = "+ MiSKP.IdSkatePark;
            ;
 
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
-        public static void EliminarNot(int IdSKP)
+        public static void EliminarSKP(int IdSKP)
         {
             SkateParks SKP = new SkateParks();
             SqlConnection Conn = Conectar();

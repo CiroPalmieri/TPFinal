@@ -3,7 +3,7 @@
     width: 100%;
 }
 
-th, td {
+ td {
     text-align: left;
     padding: 8px;
 }
@@ -13,6 +13,13 @@ tr:nth-child(even) {
 }
 
 th {
+    text-align: center;
     background-color: #4CAF50;
     color: white;
+    padding: 8px;
+}
+
+#asd
+{
+    align-content:center;
 }

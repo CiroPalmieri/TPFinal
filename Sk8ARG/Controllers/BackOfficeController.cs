@@ -73,7 +73,7 @@ namespace Sk8ARG.Controllers
         {
             SkateParks SKP = new SkateParks();
             ViewBag.Accion = accion;
-            return View("Editar", SKP);
+            return View("Edición", SKP);
         }
         public ActionResult Editar(int idSKP, string accion)
         {
@@ -90,20 +90,20 @@ namespace Sk8ARG.Controllers
             {
                 if (SKP.ArchivoImagen != null)
                 {
-                    string NuevaUbicacion = Server.MapPath("~/Content/") + SKP.ArchivoImagen.FileName;
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + SKP.ArchivoImagen.FileName;
                     SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
                     SKP.Imagen = SKP.ArchivoImagen.FileName;
                 }
 
                 BD.EditarSKP(SKP);
-                List<SkateParks> lstNoticias = BD.ListarSkateParks();
-                ViewBag.Noticias = lstNoticias;
+                List<SkateParks> lstSKP = BD.ListarSkateParks();
+                ViewBag.Lskp = lstSKP;
             }
             else
             {
                 if (SKP.ArchivoImagen != null)
                 {
-                    string NuevaUbicacion = Server.MapPath("~/Content/") + SKP.ArchivoImagen.FileName;
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + SKP.ArchivoImagen.FileName;
                     SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
                     SKP.Imagen = SKP.ArchivoImagen.FileName;
                 }
@@ -111,6 +111,15 @@ namespace Sk8ARG.Controllers
                 List<SkateParks> lstSKPS = BD.ListarSkateParks();
                 ViewBag.skps = lstSKPS;
             }
+            return View("ABMS");
+        }
+        public ActionResult Eliminar(int a)
+        {
+            SkateParks b = new SkateParks();
+            b = BD.TraerSKP(a);
+            BD.EliminarSKP(a);
+            ViewBag.Nom = b.Nombre;
+            ViewBag.Im = b.Imagen;
             return View("ABMS");
         }
     }
