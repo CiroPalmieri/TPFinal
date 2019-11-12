@@ -9,6 +9,7 @@
                 @using (Html.BeginForm("grabar", "BackOffice", new { accion = ViewBag.accion }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
                 {
                     @Html.HiddenFor(model => model.IdSkatePark)
+                    @Html.HiddenFor(model => model.Imagen)
                     <div class="panel panel-default">
                         <div class="panel-body text-center">
                             <img src="~/Content/images/@ViewBag.Foto" alt="Foto Skatepark" height="199" width="299">

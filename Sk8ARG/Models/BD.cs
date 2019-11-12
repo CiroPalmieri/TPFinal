@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server=.;Database =TP PAGINA;Trusted_Connection=True;";
+            string strConn = "Server = A-AMI-19; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;
@@ -95,11 +95,12 @@ namespace Sk8ARG.Models
             {
                 int IdR = Convert.ToInt32(Lector["idRopa"]);
                 string Nom = (Lector["Nombre"].ToString());
+                string Prc = (Lector["Precio"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
                 bool Dest = Convert.ToBoolean(Lector["Destacado"]);
 
-                Ropa miRopa = new Ropa(IdR, Nom, Foto, Desc, Dest);
+                Ropa miRopa = new Ropa(IdR, Nom,Prc, Foto, Desc, Dest);
                 ListaRopa.Add(miRopa);
             }
 
@@ -172,6 +173,31 @@ namespace Sk8ARG.Models
             Consulta.CommandText = "UPDATE Skateparks set Destacado = 1 where  IdSkatePark = " + idSKP;
             Lector = Consulta.ExecuteReader();
             Desconectar(Conn);
+        }
+        public static Ropa TraerRopa(int idRpa)
+        {
+            Ropa Rpa = new Ropa();
+            SqlConnection conn = Conectar();
+            SqlCommand consulta = conn.CreateCommand();
+            consulta.CommandText = "SELECT * FROM Ropa where IdRopa = " + idRpa;
+            consulta.CommandType = System.Data.CommandType.Text;
+            SqlDataReader lector = consulta.ExecuteReader();
+
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    int IdRp = Convert.ToInt32(lector["IdRopa"]);
+                    string Name = lector["Nombre"].ToString();
+                    string Prc = lector["Precio"].ToString();
+                    string Desc= lector["Descripcion"].ToString();
+                    string Imagen = lector["Foto"].ToString();
+                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
+                    Rpa = new Ropa(IdRp, Name, Prc, Desc, Imagen,Destacada);
+                }
+            }
+            Desconectar(conn);
+            return Rpa;
         }
     }
 }

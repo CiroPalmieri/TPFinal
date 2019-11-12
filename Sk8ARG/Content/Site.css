@@ -23,5 +23,11 @@ textarea {
     max-width: 280px;
 }
 
+#Error
+{
+    text-align : center;
+    color : red;
+}
+
 
 

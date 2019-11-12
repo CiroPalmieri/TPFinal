@@ -94,7 +94,7 @@ namespace Sk8ARG.Controllers
                     SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
                     SKP.Imagen = SKP.ArchivoImagen.FileName;
                 }
-              
+             
                 BD.EditarSKP(SKP);
                 List<SkateParks> lstSKP = BD.ListarSkateParks();
                 ViewBag.Lskp = lstSKP;
