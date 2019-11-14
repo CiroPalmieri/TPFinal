@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server = A-AMI-19; Database = TP PAGINA; User Id = alumno;Password = alumno;";
+            string strConn = "Server = A-CAM-02; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;
@@ -198,6 +198,27 @@ namespace Sk8ARG.Models
             }
             Desconectar(conn);
             return Rpa;
+        }
+        public static SkateParks TraerDest()
+        {
+            SkateParks SKP = new SkateParks();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "SELECT * from SkateParks where Destacado = 1";
+            SqlDataReader lector = Consulta.ExecuteReader();
+            while (lector.Read())
+            {
+                int IdSkatePark = Convert.ToInt32(lector["IdSkatePark"]);
+                string Nombre = lector["Nombre"].ToString();
+                string Ubicacion = lector["Ubicacion"].ToString();
+                string Descripcion = lector["Descripcion"].ToString();
+                string Imagen = lector["Foto"].ToString();
+                Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
+                SKP = new SkateParks(IdSkatePark, Nombre, Imagen, Descripcion, Destacada, Ubicacion);
+            }
+            Desconectar(Conn);
+            return SKP;
         }
     }
 }

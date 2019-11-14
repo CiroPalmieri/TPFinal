@@ -1,15 +1,19 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Sk8ARG.Models;
 namespace Sk8ARG.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            SkateParks a = new SkateParks();
+            a = BD.TraerDest();
+            ViewBag.Dou = a;
             return View();
         }
 
