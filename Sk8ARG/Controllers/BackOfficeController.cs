@@ -12,7 +12,15 @@ namespace Sk8ARG.Controllers
         // GET: BackOffice
         public ActionResult Index()
         {
-            return View();
+            if (Session["Login"]!=null)
+            {
+                return View("ABM");
+            }
+            else
+            {
+                return View();
+            }
+
         }
         public ActionResult ABMS(int a)
         {
@@ -61,30 +69,40 @@ namespace Sk8ARG.Controllers
             }
             else
             {
-                List<SkateParks> Dou = new List<SkateParks>();
-                SkateParks miskp = new SkateParks();
-
-                Dou = BD.ListarSkateParks();
-                ViewBag.Dou = Dou;
+              
+                Session["Login"] = true;
                 return View("ABM");
                 
             }
         }
-        public ActionResult ingresar(string accion)
+        public ActionResult ingresarSKP(string accion)
         {
             SkateParks SKP = new SkateParks();
             ViewBag.Accion = accion;
             return View("Edición", SKP);
         }
-        public ActionResult Editar(int idSKP, string accion)
+        public ActionResult IngresarRopa(string accion)
+        {
+            Ropa Miropa = new Ropa();
+            ViewBag.Accion = accion;
+            return View("EdicionRopa", Miropa);
+        }
+        public ActionResult EditarSKP(int idSKP, string accion)
         {
             SkateParks SKP = BD.TraerSKP(idSKP);
             ViewBag.Foto= SKP.Imagen;
             ViewBag.Accion = accion;
             return View("Edición", SKP);
         }
+        public ActionResult EditarRopa(int IdRopa, string accion)
+        {
+            Ropa MiRopa = BD.TraerRopa(IdRopa);
+            ViewBag.Foto = MiRopa.Foto;
+            ViewBag.Accion = accion;
+            return View("EdicionRopa", MiRopa);
+        }
         [HttpPost]
-        public ActionResult grabar(SkateParks SKP, string accion)
+        public ActionResult grabarSKP(SkateParks SKP, string accion)
         {
             if (accion == "Editar")
             {
@@ -93,8 +111,7 @@ namespace Sk8ARG.Controllers
                     string NuevaUbicacion = Server.MapPath("~/Content/images/") + SKP.ArchivoImagen.FileName;
                     SKP.ArchivoImagen.SaveAs(NuevaUbicacion);
                     SKP.Imagen = SKP.ArchivoImagen.FileName;
-                }
-             
+                }            
                 BD.EditarSKP(SKP);
                 List<SkateParks> lstSKP = BD.ListarSkateParks();
                 ViewBag.Lskp = lstSKP;
@@ -113,17 +130,58 @@ namespace Sk8ARG.Controllers
             }
             return RedirectToAction("ABMS", new { a = 1 });
         }
-        public ActionResult Eliminar(int idSKP)
+        [HttpPost]
+        public ActionResult GrabarRopa(Ropa MiRopa, string accion)
+        {
+            if (accion == "Editar")
+            {
+                if (MiRopa.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + MiRopa.ArchivoImagen.FileName;
+                    MiRopa.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    MiRopa.Foto = MiRopa.ArchivoImagen.FileName;
+                }
+                BD.EditarRopa(MiRopa);
+                List<Ropa> LstRopa = BD.ListarRopa();
+                ViewBag.Lskp = LstRopa;
+            }
+            else
+            {
+                if (MiRopa.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + MiRopa.ArchivoImagen.FileName;
+                    MiRopa.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    MiRopa.Foto = MiRopa.ArchivoImagen.FileName;
+                }
+                BD.InsertarROPA(MiRopa);
+                List<Ropa> ropas= BD.ListarRopa();
+                ViewBag.LstRopa = ropas;
+            }
+            return RedirectToAction("ABMS", new { a = 2 });
+        }
+        public ActionResult EliminarSKP(int idSKP)
         {
             BD.EliminarSKP(idSKP);
             return RedirectToAction("ABMS", new { a = 1 });
         }
-        public ActionResult Destacar(int idSKP)
+        public ActionResult EliminarRopa(int IdRopa)
+        {
+            BD.EliminarRopa(IdRopa);
+            return RedirectToAction("ABMS", new { a = 1 });
+        }
+        public ActionResult DestacarSKP(int idSKP)
         {
             SkateParks b = new SkateParks();
-            BD.Destacar(idSKP);
+            BD.DestacarSKP(idSKP);
             b = BD.TraerSKP(idSKP);          
             return RedirectToAction("ABMS", new { a = 1 });
+        }
+        public ActionResult DestacarRopa(int IdRopa)
+        {
+            Ropa b = new Ropa();
+            BD.DestacarRopa(IdRopa);
+            b = BD.TraerRopa(IdRopa);
+            return RedirectToAction("ABMS", new { a = 2 });
         }
     }
 }

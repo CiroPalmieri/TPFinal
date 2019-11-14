@@ -26,17 +26,21 @@ namespace Sk8ARG.Models
         {
             IdHW = 0;
             Nombre = "";
+            Precio = "";
+            Stock = 0;
             Foto = "";
             Descripcion = "";
             Dest = false;
         }
-        public Hardware(int a, string b, string c, string d, bool e)
+        public Hardware(int a, string b, string c, string d, int e, string f, bool g)
         {
             idHW= a;
             Nombre = b;
-            Foto = c;
+            Precio = c;
+            Foto = f;
             Descripcion = d;
-            Dest = e;
+            Stock = e;
+            Dest = g;
         }
     }
 }

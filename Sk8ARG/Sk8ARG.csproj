@@ -205,6 +205,8 @@
     <Content Include="Views\BackOffice\ABMR.cshtml" />
     <Content Include="Views\BackOffice\ABMH.cshtml" />
     <Content Include="Views\BackOffice\Edición.cshtml" />
+    <Content Include="Views\BackOffice\EdicionRopa.cshtml" />
+    <Content Include="Views\BackOffice\EdicionHW.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

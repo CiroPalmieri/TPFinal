@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server = A-AMI-19; Database = TP PAGINA; User Id = alumno;Password = alumno;";
+            string strConn = "Server = A-CAZ-05; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;
@@ -98,15 +98,42 @@ namespace Sk8ARG.Models
                 string Prc = (Lector["Precio"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
+                int Stock = Convert.ToInt32(Lector["Stock"]);
                 bool Dest = Convert.ToBoolean(Lector["Destacado"]);
 
-                Ropa miRopa = new Ropa(IdR, Nom,Prc, Foto, Desc, Dest);
+                Ropa miRopa = new Ropa(IdR, Nom,Prc, Foto, Desc,Stock,Dest);
                 ListaRopa.Add(miRopa);
             }
 
             Desconectar(Conn);
             return ListaRopa;
 
+        }
+        public static Ropa TraerRopa(int idRopa)
+        {
+            Ropa Ropita = new Ropa();
+            SqlConnection conn = Conectar();
+            SqlCommand consulta = conn.CreateCommand();
+            consulta.CommandText = "SELECT * FROM Ropa where IdRopa = " + idRopa;
+            consulta.CommandType = System.Data.CommandType.Text;
+            SqlDataReader lector = consulta.ExecuteReader();
+
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    int IdRopa = Convert.ToInt32(lector["IdRopa"]);
+                    string Nombre = lector["Nombre"].ToString();
+                    string precio = lector["Precio"].ToString();
+                    string Descripcion = lector["Descripcion"].ToString();
+                    int Stock = Convert.ToInt32(lector["Stock"]);
+                    string Imagen = lector["Foto"].ToString();
+                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
+                    Ropita = new Ropa(IdRopa, Nombre, precio, Imagen, Descripcion, Stock,Destacada);
+                }
+            }
+            Desconectar(conn);
+            return Ropita;
         }
         public static List<Hardware> ListarHardware()
         {
@@ -131,12 +158,46 @@ namespace Sk8ARG.Models
             Desconectar(Conn);
             return ListaHW;
         }
+        public static Hardware TraerHW(int IdHW)
+        {
+            Hardware MiWH = new Hardware();
+            SqlConnection conn = Conectar();
+            SqlCommand consulta = conn.CreateCommand();
+            consulta.CommandText = "SELECT * FROM Hardware where IdHardware = " + IdHW;
+            consulta.CommandType = System.Data.CommandType.Text;
+            SqlDataReader lector = consulta.ExecuteReader();
+
+            if (lector.HasRows)
+            {
+                while (lector.Read())
+                {
+                    int IdHW1 = Convert.ToInt32(lector["IdRopa"]);
+                    string Nombre = lector["Nombre"].ToString();
+                    string precio = lector["Precio"].ToString();
+                    string Descripcion = lector["Descripcion"].ToString();
+                    int Stock = Convert.ToInt32(lector["Stock"]);
+                    string Imagen = lector["Foto"].ToString();
+                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
+                    MiWH = new Hardware(IdHW1, Nombre,precio,Descripcion,Stock ,Imagen,Destacada);
+                }
+            }
+            Desconectar(conn);
+            return MiWH;
+        }
         public static void InsertarSKP(SkateParks MiSKP)
         {
             SqlConnection Conn = Conectar();
             SqlCommand Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
             Consulta.CommandText = "INSERT into Skateparks(Nombre,Ubicacion,Descripcion,Foto) VALUES('" + MiSKP.Nombre + "','" + MiSKP.Ubic+ "','" + MiSKP.Desc + "','" + MiSKP.Imagen +"')";
+            Consulta.ExecuteNonQuery();
+        }
+        public static void InsertarROPA(Ropa Ropita)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "INSERT into Ropa(Nombre,Precio,Descripcion,Stock,Foto) VALUES('" + Ropita.Nombre+ "','" + Ropita.Precio+ "','" + Ropita.Descripcion + "','" + Ropita.Stock+ "','" + Ropita.Foto + "')";
             Consulta.ExecuteNonQuery();
         }
         public static void EditarSKP(SkateParks MiSKP)
@@ -150,6 +211,28 @@ namespace Sk8ARG.Models
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
+        public static void EditarRopa(Ropa Ropita)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+
+            string SQL = "UPDATE Ropa SET ";
+            SQL += "Nombre = '" + Ropita.Nombre+ "', Foto='" + Ropita.Foto+ "', " + "Descripcion= '" + Ropita.Descripcion+ "', " + " Stock = " + Ropita.Stock + " WHERE IdRopa = " + Ropita.IdRopa;
+            Consulta.CommandText = SQL;
+            Consulta.ExecuteNonQuery();
+        }
+        public static void EditarHW(Hardware MiHW)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+
+            string SQL = "UPDATE Hardware SET ";
+            SQL += "Nombre = '" + MiHW.Nombre + "', Foto='" + MiHW.Foto + "', " + "Descripcion= '" + MiHW.Descripcion + "' WHERE IdHardware = " + MiHW.IdHW;
+            Consulta.CommandText = SQL;
+            Consulta.ExecuteNonQuery();
+        }
         public static void EliminarSKP(int idSKP)
         {
             SkateParks SKP = new SkateParks();
@@ -159,7 +242,16 @@ namespace Sk8ARG.Models
             Consulta.CommandText = "DELETE  from Skateparks where IdSkatepark= " + idSKP+ "";
             Consulta.ExecuteNonQuery();
         }
-        public static void Destacar(int idSKP)
+        public static void EliminarRopa(int IdRopa)
+        {
+            Ropa Ropita = new Ropa();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "DELETE  from Ropa where IdRopa= " + IdRopa + "";
+            Consulta.ExecuteNonQuery();
+        }
+        public static void DestacarSKP(int idSKP)
         {
             SkateParks skpDestacado = new SkateParks();
             SqlConnection Conn = Conectar();
@@ -174,30 +266,20 @@ namespace Sk8ARG.Models
             Lector = Consulta.ExecuteReader();
             Desconectar(Conn);
         }
-        public static Ropa TraerRopa(int idRpa)
+        public static void DestacarRopa(int IdRopa)
         {
-            Ropa Rpa = new Ropa();
-            SqlConnection conn = Conectar();
-            SqlCommand consulta = conn.CreateCommand();
-            consulta.CommandText = "SELECT * FROM Ropa where IdRopa = " + idRpa;
-            consulta.CommandType = System.Data.CommandType.Text;
-            SqlDataReader lector = consulta.ExecuteReader();
-
-            if (lector.HasRows)
-            {
-                while (lector.Read())
-                {
-                    int IdRp = Convert.ToInt32(lector["IdRopa"]);
-                    string Name = lector["Nombre"].ToString();
-                    string Prc = lector["Precio"].ToString();
-                    string Desc= lector["Descripcion"].ToString();
-                    string Imagen = lector["Foto"].ToString();
-                    Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
-                    Rpa = new Ropa(IdRp, Name, Prc, Desc, Imagen,Destacada);
-                }
-            }
-            Desconectar(conn);
-            return Rpa;
+            SkateParks skpDestacado = new SkateParks();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Ropa set Destacado = 0 where Destacado = 1";
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Close();
+            Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Ropa set Destacado = 1 where  IdRopa = " + IdRopa;
+            Lector = Consulta.ExecuteReader();
+            Desconectar(Conn);
         }
     }
 }
