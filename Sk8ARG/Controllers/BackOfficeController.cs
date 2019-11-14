@@ -87,6 +87,12 @@ namespace Sk8ARG.Controllers
             ViewBag.Accion = accion;
             return View("EdicionRopa", Miropa);
         }
+        public ActionResult IngresarHW(string accion)
+        {
+            Hardware MiHW = new Hardware();
+            ViewBag.Accion = accion;
+            return View("EdicionHW", MiHW);
+        }
         public ActionResult EditarSKP(int idSKP, string accion)
         {
             SkateParks SKP = BD.TraerSKP(idSKP);
@@ -100,6 +106,13 @@ namespace Sk8ARG.Controllers
             ViewBag.Foto = MiRopa.Foto;
             ViewBag.Accion = accion;
             return View("EdicionRopa", MiRopa);
+        }
+        public ActionResult EditarHW(int IdHW, string accion)
+        {
+            Hardware MiHW = BD.TraerHW(IdHW);
+            ViewBag.Foto = MiHW.Foto;
+            ViewBag.Accion = accion;
+            return View("EdicionHW", MiHW);
         }
         [HttpPost]
         public ActionResult grabarSKP(SkateParks SKP, string accion)
@@ -159,6 +172,35 @@ namespace Sk8ARG.Controllers
             }
             return RedirectToAction("ABMS", new { a = 2 });
         }
+        [HttpPost]
+        public ActionResult GrabarHW(Hardware MiHW, string accion)
+        {
+            if (accion == "Editar")
+            {
+                if (MiHW.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + MiHW.ArchivoImagen.FileName;
+                    MiHW.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    MiHW.Foto = MiHW.ArchivoImagen.FileName;
+                }
+                BD.EditarHW(MiHW);
+                List<Hardware> LstHW = BD.ListarHardware();
+                ViewBag.Lskp = LstHW;
+            }
+            else
+            {
+                if (MiHW.ArchivoImagen != null)
+                {
+                    string NuevaUbicacion = Server.MapPath("~/Content/images/") + MiHW.ArchivoImagen.FileName;
+                    MiHW.ArchivoImagen.SaveAs(NuevaUbicacion);
+                    MiHW.Foto = MiHW.ArchivoImagen.FileName;
+                }
+                BD.InsertarHW(MiHW);
+                List<Hardware> LstHW = BD.ListarHardware();
+                ViewBag.LstRopa = LstHW;
+            }
+            return RedirectToAction("ABMS", new { a = 3 });
+        }
         public ActionResult EliminarSKP(int idSKP)
         {
             BD.EliminarSKP(idSKP);
@@ -167,7 +209,12 @@ namespace Sk8ARG.Controllers
         public ActionResult EliminarRopa(int IdRopa)
         {
             BD.EliminarRopa(IdRopa);
-            return RedirectToAction("ABMS", new { a = 1 });
+            return RedirectToAction("ABMS", new { a = 2 });
+        }
+        public ActionResult EliminarHW(int IdHW)
+        {
+            BD.EliminarHW(IdHW);
+            return RedirectToAction("ABMS", new { a = 3 });
         }
         public ActionResult DestacarSKP(int idSKP)
         {
@@ -182,6 +229,13 @@ namespace Sk8ARG.Controllers
             BD.DestacarRopa(IdRopa);
             b = BD.TraerRopa(IdRopa);
             return RedirectToAction("ABMS", new { a = 2 });
+        }
+        public ActionResult DestacarHW(int IdHW)
+        {
+            Hardware b = new Hardware();
+            BD.DestacarHW(IdHW);
+            b = BD.TraerHW(IdHW);
+            return RedirectToAction("ABMS", new { a = 3 });
         }
     }
 }

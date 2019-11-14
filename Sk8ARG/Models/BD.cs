@@ -82,7 +82,6 @@ namespace Sk8ARG.Models
             Desconectar(conn);
             return SKP;
         }
-
         public static List<Ropa> ListarRopa()
         {
             List<Ropa> ListaRopa = new List<Ropa>();
@@ -99,7 +98,7 @@ namespace Sk8ARG.Models
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
                 int Stock = Convert.ToInt32(Lector["Stock"]);
-                bool Dest = Convert.ToBoolean(Lector["Destacado"]);
+                Boolean Dest = Convert.ToBoolean(Lector["Destacado"] is DBNull ? 0 : Lector["Destacado"]);
 
                 Ropa miRopa = new Ropa(IdR, Nom,Prc, Foto, Desc,Stock,Dest);
                 ListaRopa.Add(miRopa);
@@ -145,13 +144,15 @@ namespace Sk8ARG.Models
             SqlDataReader Lector = Consulta.ExecuteReader();
             while (Lector.Read())
             {
-                int IdHW = Convert.ToInt32(Lector["idHardware"]);
+                int IdHW = Convert.ToInt32(Lector["IdHardware"]);
+                int Stock = Convert.ToInt32(Lector["Stock"]);
                 string Nom = (Lector["Nombre"].ToString());
+                string Prec = (Lector["Precio"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
-                bool Dest = Convert.ToBoolean(Lector["Destacado"]);
+                Boolean Dest = Convert.ToBoolean(Lector["Destacado"] is DBNull ? 0 : Lector["Destacado"]);
 
-                Hardware miHW = new Hardware(IdHW, Nom, Foto, Desc, Dest);
+                Hardware miHW = new Hardware(IdHW,Nom,Prec,Desc,Stock,Foto,Dest);
                 ListaHW.Add(miHW);
             }
 
@@ -171,14 +172,14 @@ namespace Sk8ARG.Models
             {
                 while (lector.Read())
                 {
-                    int IdHW1 = Convert.ToInt32(lector["IdRopa"]);
+                    int IdHW1 = Convert.ToInt32(lector["IdHardware"]);
                     string Nombre = lector["Nombre"].ToString();
                     string precio = lector["Precio"].ToString();
                     string Descripcion = lector["Descripcion"].ToString();
                     int Stock = Convert.ToInt32(lector["Stock"]);
                     string Imagen = lector["Foto"].ToString();
                     Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
-                    MiWH = new Hardware(IdHW1, Nombre,precio,Descripcion,Stock ,Imagen,Destacada);
+                    MiWH = new Hardware(IdHW1,Nombre,precio,Descripcion,Stock,Imagen,Destacada);
                 }
             }
             Desconectar(conn);
@@ -197,7 +198,15 @@ namespace Sk8ARG.Models
             SqlConnection Conn = Conectar();
             SqlCommand Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
-            Consulta.CommandText = "INSERT into Ropa(Nombre,Precio,Descripcion,Stock,Foto) VALUES('" + Ropita.Nombre+ "','" + Ropita.Precio+ "','" + Ropita.Descripcion + "','" + Ropita.Stock+ "','" + Ropita.Foto + "')";
+            Consulta.CommandText = "INSERT into Ropa(Nombre,Precio,Descripcion,Stock,Foto) VALUES('" + Ropita.Nombre+ "','" + Ropita.Precio+ "','" + Ropita.Descripcion + "'," + Ropita.Stock+ ",'" + Ropita.Foto + "')";
+            Consulta.ExecuteNonQuery();
+        }
+        public static void InsertarHW(Hardware MiHW)
+        {
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "INSERT into HardWare(Nombre,Precio,Descripcion,Stock,Foto) VALUES('" + MiHW.Nombre + "','" + MiHW.Precio + "','" + MiHW.Descripcion + "'," + MiHW.Stock + ",'" + MiHW.Foto + "')";
             Consulta.ExecuteNonQuery();
         }
         public static void EditarSKP(SkateParks MiSKP)
@@ -229,7 +238,7 @@ namespace Sk8ARG.Models
             Consulta.CommandType = System.Data.CommandType.Text;
 
             string SQL = "UPDATE Hardware SET ";
-            SQL += "Nombre = '" + MiHW.Nombre + "', Foto='" + MiHW.Foto + "', " + "Descripcion= '" + MiHW.Descripcion + "' WHERE IdHardware = " + MiHW.IdHW;
+            SQL += "Nombre = '" + MiHW.Nombre + "', Foto='" + MiHW.Foto + "', " + "Descripcion= '" + MiHW.Descripcion + "', " + " Stock = " + MiHW.Stock + " WHERE IdHardware = " + MiHW.IdHW;
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
@@ -249,6 +258,15 @@ namespace Sk8ARG.Models
             SqlCommand Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
             Consulta.CommandText = "DELETE  from Ropa where IdRopa= " + IdRopa + "";
+            Consulta.ExecuteNonQuery();
+        }
+        public static void EliminarHW(int IdHW)
+        {
+            Hardware MIHW = new Hardware();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "DELETE  from HardWare where IdHardware= " + IdHW + "";
             Consulta.ExecuteNonQuery();
         }
         public static void DestacarSKP(int idSKP)
@@ -278,6 +296,21 @@ namespace Sk8ARG.Models
             Consulta = Conn.CreateCommand();
             Consulta.CommandType = System.Data.CommandType.Text;
             Consulta.CommandText = "UPDATE Ropa set Destacado = 1 where  IdRopa = " + IdRopa;
+            Lector = Consulta.ExecuteReader();
+            Desconectar(Conn);
+        }
+        public static void DestacarHW(int IdHW)
+        {
+            Hardware HWD= new Hardware();
+            SqlConnection Conn = Conectar();
+            SqlCommand Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Hardware set Destacado = 0 where Destacado = 1";
+            SqlDataReader Lector = Consulta.ExecuteReader();
+            Lector.Close();
+            Consulta = Conn.CreateCommand();
+            Consulta.CommandType = System.Data.CommandType.Text;
+            Consulta.CommandText = "UPDATE Hardware set Destacado = 1 where  IdHardware = " + IdHW;
             Lector = Consulta.ExecuteReader();
             Desconectar(Conn);
         }

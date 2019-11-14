@@ -14,6 +14,8 @@ namespace Sk8ARG.Models
         private int stock;
         private string foto;
         private bool dest;
+        private HttpPostedFileBase _ArchivoImagen;
+
 
         public int IdHW { get => idHW; set => idHW = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -22,6 +24,7 @@ namespace Sk8ARG.Models
         public int Stock { get => stock; set => stock = value; }
         public string Foto { get => foto; set => foto = value; }
         public bool Dest { get => dest; set => dest = value; }
+        public HttpPostedFileBase ArchivoImagen { get => _ArchivoImagen; set => _ArchivoImagen = value; }
         public Hardware()
         {
             IdHW = 0;
