@@ -6,9 +6,9 @@
 @{
     ViewBag.Title = "ABMS";
 }
-<h2>ABMSkatePark</h2>
+<h2>Listado Ropa</h2>
 <div class="ph-float">
-    <a href='@Url.Action("ingresar", "Backoffice", new {accion = "Ingresar" })' class='ph-button ph-btn-green'>Ingresar nuevo skatepark</a>
+    <a href='@Url.Action("IngresarRopa", "Backoffice", new {accion = "Ingresar" })' class='ph-button ph-btn-green'>Ingresar nueva Ropa</a>
 </div>
 
 <table>
@@ -36,19 +36,19 @@
             {
                 <td id="a1">
                     <div class="ph-float">
-                        <a href='@Url.Action("Destacar", "Backoffice", new { idRp = Rp.IdRopa })' class='ph-button ph-btn-green'>Destacar</a>
+                        <a href='@Url.Action("DestacarRopa", "Backoffice", new { idRopa = Rp.IdRopa })' class='ph-button ph-btn-green'>Destacar</a>
                     </div>
                 </td>
             }
             <td id="a1">
                 <div class="ph-float">
-                    <a href='@Url.Action("Eliminar", "BackOffice", new { idRp = Rp.IdRopa})' class='ph-button ph-btn-red'>Borrar</a>
+                    <a href='@Url.Action("EliminarRopa", "BackOffice", new { idRopa = Rp.IdRopa})' class='ph-button ph-btn-red'>Borrar</a>
                 </div>
             </td>
             <td id="a1">
                 <div id="asd" class="ph-container">
                     <div class="ph-float">
-                        <a href='@Url.Action("editar", "Backoffice", new {idRp = Rp.IdRopa, accion = "Editar"})' class='ph-button ph-btn-blue'>Editar</a>
+                        <a href='@Url.Action("EditarRopa", "Backoffice", new {idRopa = Rp.IdRopa, accion = "Editar"})' class='ph-button ph-btn-blue'>Editar</a>
                     </div>
                 </div>
                 <div class="ph-clear"></div>

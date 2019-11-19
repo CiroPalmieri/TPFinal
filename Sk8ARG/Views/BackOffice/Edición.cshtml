@@ -6,7 +6,7 @@
     <div class="container bootstrap snippets">
         <div class="row">
             <div class="col-xs-12 col-sm-9">
-                @using (Html.BeginForm("grabar", "BackOffice", new { accion = ViewBag.accion }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                @using (Html.BeginForm("grabarSKP", "BackOffice", new { accion = ViewBag.accion }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
                 {
                     @Html.HiddenFor(model => model.IdSkatePark)
                     @Html.HiddenFor(model => model.Imagen)

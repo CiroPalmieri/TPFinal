@@ -1,36 +1,58 @@
 ﻿@using Sk8ARG.Models
 @model Hardware
 <link rel="stylesheet" type="text/css" href="~/Content/EstilosABM.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/Btns.css" />
 
 @{
     ViewBag.Title = "ABMS";
 }
-<h2>ABMSkatePark</h2>
-@Html.ActionLink("Ingresar nuevo hardware", "ingresar", "BackOffice", new { accion = "Ingresar" }, null)
+<h2>Listado de Hardware </h2>
+<div class="ph-float">
+    <a href='@Url.Action("IngresarHW", "Backoffice", new {accion = "Ingresar" })' class='ph-button ph-btn-green'>Ingresar nuevo Hardware</a>
+</div>
+
 <table>
-    @foreach (Hardware hw in ViewBag.Lhw)
+    @foreach (Hardware MiHW in ViewBag.Lhw)
     {
-    <tr>
-        <th>Nombre</th>
-        <th>Foto</th>
-        <th>Destacar</th>
-        <th>Eliminar</th>
-        <th>Editar</th>       
-    </tr>
         <tr>
-            <td>@hw.Nombre</td>
-            <td><img src="~/Content/images/@hw.Foto" width="199" height="99" /></td>
-            @if (hw.Dest)
+            <th>Nombre</th>
+            <th>Foto</th>
+            <th>Destacar</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        <tr>
+            <td id="a2">@MiHW.Nombre</td>
+            <td><img src="~/Content/images/@MiHW.Foto" width="199" height="99" /></td>
+            @if (MiHW.Dest)
             {
-                <td><img src="~/Content/images/yadestacada.jpg" width="199" height="99" /></td>
+                <td id="a1">
+                    <div class="ph-float">
+                        <p href='' class='ph-button ph-btn-pink'>Ya destacada</p>
+                    </div>
+                </td>
             }
             else
             {
-                <td><img src="~/Content/images/destacar.jpg" width="199" height="99" /></td>
+                <td id="a1">
+                    <div class="ph-float">
+                        <a href='@Url.Action("DestacarHW", "Backoffice", new { IdHW = MiHW.IdHW})' class='ph-button ph-btn-green'>Destacar</a>
+                    </div>
+                </td>
             }
-            
-            <td><a href='@Url.Action("eliminar", "Backoffice", new { idHw= hw.IdHW})'>X</a></td>
-            <td><a href='@Url.Action("editar", "Backoffice", new { idHw = hw.IdHW, accion = "Editar" })'>Editar</a></td>
+            <td id="a1">
+                <div class="ph-float">
+                    <a href='@Url.Action("EliminarHW", "BackOffice", new { IdHW = MiHW.IdHW})' class='ph-button ph-btn-red'>Borrar</a>
+                </div>
+            </td>
+            <td id="a1">
+                <div id="asd" class="ph-container">
+                    <div class="ph-float">
+                        <a href='@Url.Action("EditarHW", "Backoffice", new {IdHW = MiHW.IdHW, accion = "Editar"})' class='ph-button ph-btn-blue'>Editar</a>
+                    </div>
+                </div>
+                <div class="ph-clear"></div>
+            </td>
         </tr>
     }
 </table>
