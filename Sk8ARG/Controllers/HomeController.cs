@@ -12,7 +12,7 @@ namespace Sk8ARG.Controllers
         public ActionResult Index()
         {
             SkateParks a = new SkateParks();
-            a = BD.TraerDest();
+            a = BD.TraerDestSKP();
             ViewBag.Dou = a;
             return View();
         }
