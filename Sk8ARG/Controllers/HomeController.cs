@@ -14,6 +14,7 @@ namespace Sk8ARG.Controllers
             SkateParks a = new SkateParks();
             a = BD.TraerDestSKP();
             ViewBag.Dou = a;
+            ViewBag.FotoUbi = a.Ubic + ".jpg";
             return View();
         }
 
