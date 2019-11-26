@@ -1,0 +1,16 @@
+﻿@using Sk8ARG.Models
+@{
+    ViewBag.Title = "ListSKP";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/tabla.css" />
+<h2>ListSKP</h2>
+
+@foreach (SkateParks a in ViewBag.Lista)
+{
+<div class="gallery">
+    <a target="_blank" href="img_5terre.jpg">
+        <img src="~/Content/images/@a.Imagen">
+    </a>
+    <div class="desc">@a.Nombre</div>
+</div>
+}

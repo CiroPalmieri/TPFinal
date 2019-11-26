@@ -40,50 +40,58 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="~/Content/@ViewBag.FotoUbi" class="img-fluid tm-intro-img" />
+                    <img src="~/Content/images/@ViewBag.Dou.Imagen" class="img-fluid tm-intro-img" />
                 </div>
                 <div class="col-lg-6">
                     <div class="tm-intro-text-container">
-                        <a href="@Url.Action("Index","BackOffice")" class="tm-text-primary mb-4 tm-section-title">Skatepark Destacado</a>
+                        <a href="@Url.Action("ViewSKP","Home")" class="tm-text-primary mb-4 tm-section-title">Skatepark Destacado</a>
                         <p class="mb-4 tm-intro-text">
                             A la derecha está la ubicación del Skatepark destacado!
                         </p>
                         <p class="mb-5 tm-intro-text">
-                            Please tell your friends about our site
-                            <a rel="nofollow" href="https://templatemo.com">templatemo</a>. Thank you.
-                            Curabitur dapibus tristique enim a imperdiet. Etiam
-                            tristique sem sed condimentum posuere.
+                          @ViewBag.Dou.Desc
                         </p>
                         <div class="tm-next">
-                            <a href="#work" class="tm-intro-text tm-btn-primary">Read More</a>
+                            <a href="@Url.Action("ListSKP","Home")" class="tm-intro-text tm-btn-primary">Mas SkateParks</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row tm-section-pad-top">
-                <div class="col-lg-4">
-                    <img src="~/Content/images/skeit.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:147px; margin-bottom:39px" height="90" width="90">
-                    <h4 class="text-center tm-text-primary mb-4" style="color:black">Skateparks</h4>
-                    <p style="text-align: center">
-                        Listado de Skateparks
-                    </p>
-                </div>
-
-                <div class="col-lg-4 mt-5 mt-lg-0">
-                    <img src="~/Content/images/callet.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:147px; margin-bottom:39px" height="90" width="90">
-                    <h4 class="text-center tm-text-primary mb-4" style="color:black">Hardware</h4>
-                    <p style="text-align: center">
-                        Hardware para tu skate
-                    </p>
-                </div>
-                <div class="col-lg-4 mt-5 mt-lg-0">
-                    <img src="~/Content/images/judi.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:148px; margin-bottom:39px" height="90" width="90">
-                    <h4 class="text-center tm-text-primary mb-4" style="color:black">Ropa</h4>
-                    <p style="text-align: center">
-                        La mejor ropa para andar 
-                    </p>
-                </div>
+                
+                    <div class="col-lg-4">
+                        <a href="@Url.Action("ListSKP","Home")">
+                            <img src="~/Content/images/skeit.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:147px; margin-bottom:39px" height="90" width="90">
+                            <h4 class="text-center tm-text-primary mb-4" style="color:black">Skateparks</h4>
+                        </a>
+                        <p style="text-align: center">
+                           Listado de Skateparks
+                        </p>
+                    </div>
+                
+                
+                    <div class="col-lg-4 mt-5 mt-lg-0">
+                        <a href="@Url.Action("ListHW","Home")">
+                            <img src="~/Content/images/callet.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:147px; margin-bottom:39px" height="90" width="90">
+                            <h4 class="text-center tm-text-primary mb-4" style="color:black">Hardware</h4>
+                        </a>
+                                <p style="text-align: center">
+                                    Hardware para tu skate
+                                </p>
+                    </div>
+               
+                
+                    <div class="col-lg-4 mt-5 mt-lg-0">
+                        <a href="@Url.Action("ListRP","Home")">
+                            <img src="~/Content/images/judi.png" class="fas fa-4x fa-bus text-center tm-icon" style="margin-left:148px; margin-bottom:39px" height="90" width="90">
+                            <h4 class="text-center tm-text-primary mb-4" style="color:black">Ropa</h4>
+                        </a>
+                            <p style="text-align: center">
+                                La mejor ropa para andar
+                            </p>
+                    </div>
+                
             </div>
         </div>
     </section>
@@ -144,9 +152,10 @@
             </p>
         </footer>
     </section>
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="slick/slick.min.js"></script>
-    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.singlePageNav.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script>
+    <script src="~/Content/TemplateHome/js/jquery-1.9.1.min.js"></script>
+    <script src="~/Content/TemplateHome/slick/slick.min.js"></script>
+    <script src="~/Content/TemplateHome/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/TemplateHome/js/jquery.singlePageNav.min.js"></script>
+    <script src="~/Content/TemplateHome/js/bootstrap.min.js"></script>
+    </body>
+ </html>

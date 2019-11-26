@@ -1,0 +1,17 @@
+﻿@using Sk8ARG.Models;
+@{
+    ViewBag.Title = "ListRP";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/tabla.css" />
+<h2>ListRP</h2>
+
+
+@foreach (Ropa a in ViewBag.Lista)
+{
+<div class="gallery">
+    <a target="_blank" href="img_5terre.jpg">
+        <img src="~/Content/images/@a.Foto" alt="Cinque Terre" width="600" height="400">
+    </a>
+    <div class="desc">@a.Nombre</div>
+</div>
+}

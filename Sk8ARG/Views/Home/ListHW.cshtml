@@ -1,0 +1,19 @@
+﻿@using Sk8ARG.Models
+@{
+    ViewBag.Title = "ListHW";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/EstilosABM.css" />
+<h2>ListHW</h2>
+<link rel="stylesheet" type="text/css" href="~/Content/tabla.css" />
+
+@foreach (Hardware a in ViewBag.Lista)
+{
+<div class="gallery">
+    <a target="_blank" href="img_5terre.jpg">
+        <img src="~/Content/images/@a.Foto" alt="Cinque Terre" width="600" height="400">
+    </a>
+    <div class="desc">@a.Nombre</div>
+</div>
+}

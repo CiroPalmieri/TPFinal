@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,22 +13,38 @@ namespace Sk8ARG.Controllers
             SkateParks a = new SkateParks();
             a = BD.TraerDestSKP();
             ViewBag.Dou = a;
-            ViewBag.FotoUbi = a.Ubic + ".jpg";
+            
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ViewSKP()
         {
-            ViewBag.Message = "Your application description page.";
+          
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ListSKP()
         {
-            ViewBag.Message = "Your contact page.";
+            List<SkateParks> lst = new List<SkateParks>();
+            lst = BD.ListarSkateParks();
+            ViewBag.Lista = lst;
 
             return View();
+        }
+        public ActionResult ListHW()
+        {
+            List<Hardware> lst = new List<Hardware>();
+            lst = BD.ListarHardware();
+            ViewBag.Lista = lst;
+            return View();
+        }
+        public ActionResult ListRP()
+        {
+            List<Ropa> lst = new List<Ropa>();
+            lst = BD.ListarRopa();
+            ViewBag.Lista = lst;
+           return View();
         }
     }
 }

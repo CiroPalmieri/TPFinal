@@ -167,6 +167,7 @@
     <Content Include="Content\Btns.css" />
     <Content Include="Content\edit.css" />
     <Content Include="Content\EstilosABM.css" />
+    <Content Include="Content\tabla.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -196,8 +197,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\BackOffice\Index.cshtml" />
     <Content Include="Views\BackOffice\ABMS.cshtml" />
@@ -207,6 +206,10 @@
     <Content Include="Views\BackOffice\Edición.cshtml" />
     <Content Include="Views\BackOffice\EdicionRopa.cshtml" />
     <Content Include="Views\BackOffice\EdicionHW.cshtml" />
+    <Content Include="Views\Home\ViewSKP.cshtml" />
+    <Content Include="Views\Home\ListSKP.cshtml" />
+    <Content Include="Views\Home\ListRP.cshtml" />
+    <Content Include="Views\Home\ListHW.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
