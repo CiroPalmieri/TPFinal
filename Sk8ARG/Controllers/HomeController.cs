@@ -46,5 +46,12 @@ namespace Sk8ARG.Controllers
             ViewBag.Lista = lst;
            return View();
         }
+        public ActionResult DetalleSKP(int IdSKP)
+        {
+            SkateParks a = BD.TraerSKP(IdSKP);
+            ViewBag.FotoMapa = a.Ubic + ".png";
+            ViewBag.Skp = a;
+            return View();
+        }
     }
 }

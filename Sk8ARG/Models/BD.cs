@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server = A-CCE-03; Database = TP PAGINA; User Id = alumno;Password = alumno;";
+            string strConn = "Server = A-CCE-08; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;

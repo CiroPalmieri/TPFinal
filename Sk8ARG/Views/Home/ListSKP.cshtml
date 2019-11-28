@@ -7,10 +7,23 @@
 
 @foreach (SkateParks a in ViewBag.Lista)
 {
-<div class="gallery">
-    <a href="@Url.Action("DetalleSKP","Home",new { idSKP = a.IdSkatePark }))">
-        <img src="~/Content/images/@a.Imagen">
-    </a>
-    <div class="desc">@a.Nombre</div>
-</div>
+    <div class="gallery">
+        <a href='@Url.Action("DetalleSKP","Home", new{ IdSKP = a.IdSkatePark })'>
+            <img src="~/Content/images/@a.Imagen">
+        </a>
+        <div class="desc">@a.Nombre</div>
+    </div>
 }
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

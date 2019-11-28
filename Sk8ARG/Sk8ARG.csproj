@@ -210,6 +210,7 @@
     <Content Include="Views\Home\ListSKP.cshtml" />
     <Content Include="Views\Home\ListRP.cshtml" />
     <Content Include="Views\Home\ListHW.cshtml" />
+    <Content Include="Views\Home\DetalleSKP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
