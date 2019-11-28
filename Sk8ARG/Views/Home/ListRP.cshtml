@@ -9,7 +9,7 @@
 @foreach (Ropa a in ViewBag.Lista)
 {
 <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
+    <a href="@Url.Action("DetalleRP","Home", new { IdRopa = a.IdRopa}))">
         <img src="~/Content/images/@a.Foto" alt="Cinque Terre" width="600" height="400">
     </a>
     <div class="desc">@a.Nombre</div>
