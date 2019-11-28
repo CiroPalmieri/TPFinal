@@ -5,14 +5,25 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/EstilosABM.css" />
 <h2>Lista Hardware</h2>
-<link rel="stylesheet" type="text/css" href="~/Content/tabla.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/tabla.css" />
 
 @foreach (Hardware a in ViewBag.Lista)
 {
-<div class="gallery">
-    <a href="@Url.Action("DetalleHW","Home",new { IdHW = a.IdHW}))">
-        <img src="~/Content/images/@a.Foto" alt="Cinque Terre" width="600" height="400">
-    </a>
-    <div class="desc">@a.Nombre</div>
-</div>
+    <div class="gallery">
+        <a href="@Url.Action("DetalleHW","Home",new { IdHW = a.IdHW}))">
+            <img src="~/Content/images/@a.Foto" alt="Cinque Terre" width="600" height="400">
+        </a>
+        <div class="desc">@a.Nombre</div>
+    </div>
 }
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
