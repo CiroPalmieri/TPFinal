@@ -49,8 +49,20 @@ namespace Sk8ARG.Controllers
         public ActionResult DetalleSKP(int IdSKP)
         {
             SkateParks a = BD.TraerSKP(IdSKP);
-            ViewBag.FotoMapa = a.Ubic + ".png";
+            ViewBag.FotoMapa = a.IdSkatePark + ".PNG";
             ViewBag.Skp = a;
+            return View();
+        }
+        public ActionResult DetalleHW(int idHW)
+        {
+            Hardware a = BD.TraerHW(idHW);
+            ViewBag.Hw = a;
+            return View();
+        }
+        public ActionResult DetalleRP(int idRopa)
+        {
+            Hardware a = BD.TraerHW(idRopa);
+            ViewBag.Rp = a;
             return View();
         }
     }
