@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server = A-CCE-08; Database = TP PAGINA; User Id = alumno;Password = alumno;";
+            string strConn = "Server = A-CVE-05; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;
@@ -122,7 +122,7 @@ namespace Sk8ARG.Models
                 string Prc = (Lector["Precio"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
                 string Foto = (Lector["Foto"].ToString());
-                int Stock = Convert.ToInt32(Lector["Stock"]);
+                string Stock = (Lector["Stock"].ToString());
                 Boolean Dest = Convert.ToBoolean(Lector["Destacado"] is DBNull ? 0 : Lector["Destacado"]);
 
                 Ropa miRopa = new Ropa(IdR, Nom, Prc, Foto, Desc, Stock, Dest);
@@ -150,7 +150,7 @@ namespace Sk8ARG.Models
                     string Nombre = lector["Nombre"].ToString();
                     string precio = lector["Precio"].ToString();
                     string Descripcion = lector["Descripcion"].ToString();
-                    int Stock = Convert.ToInt32(lector["Stock"]);
+                    string Stock = (lector["Stock"].ToString());
                     string Imagen = lector["Foto"].ToString();
                     Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
                     Ropita = new Ropa(IdRopa, Nombre, precio, Imagen, Descripcion, Stock, Destacada);
@@ -170,7 +170,7 @@ namespace Sk8ARG.Models
             while (Lector.Read())
             {
                 int IdHW = Convert.ToInt32(Lector["IdHardware"]);
-                int Stock = Convert.ToInt32(Lector["Stock"]);
+                string Stock = (Lector["Stock"].ToString());
                 string Nom = (Lector["Nombre"].ToString());
                 string Prec = (Lector["Precio"].ToString());
                 string Desc = (Lector["Descripcion"].ToString());
@@ -201,7 +201,7 @@ namespace Sk8ARG.Models
                     string Nombre = lector["Nombre"].ToString();
                     string precio = lector["Precio"].ToString();
                     string Descripcion = lector["Descripcion"].ToString();
-                    int Stock = Convert.ToInt32(lector["Stock"]);
+                    string Stock = (lector["Stock"].ToString());
                     string Imagen = lector["Foto"].ToString();
                     Boolean Destacada = Convert.ToBoolean(lector["Destacado"] is DBNull ? 0 : lector["Destacado"]);
                     MiWH = new Hardware(IdHW1, Nombre, precio, Descripcion, Stock, Imagen, Destacada);

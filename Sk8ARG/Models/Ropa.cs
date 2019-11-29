@@ -12,7 +12,7 @@ namespace Sk8ARG.Models
         private string precio;
         private string descripcion;
         private string foto;
-        private int stock;
+        private string stock;
         private bool dest;
         private HttpPostedFileBase _ArchivoImagen;
 
@@ -22,7 +22,7 @@ namespace Sk8ARG.Models
         public string Precio { get => precio; set => precio = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public string Foto { get => foto; set => foto = value; }
-        public int Stock { get => stock; set => stock = value; }
+        public string Stock { get => stock; set => stock = value; }
         public bool Dest { get => dest; set => dest = value; }
         public HttpPostedFileBase ArchivoImagen { get => _ArchivoImagen; set => _ArchivoImagen = value; }
         public Ropa()
@@ -31,11 +31,11 @@ namespace Sk8ARG.Models
             Nombre = "";
             Precio = "";
             Foto = "";
-            Stock = 0;
+            Stock = "";
             Descripcion = "";
             Dest = false;
         }
-        public Ropa(int a, string b,string c, string d, string e, int f,bool g)
+        public Ropa(int a, string b,string c, string d, string e, string f,bool g)
         {
             IdRopa = a;
             Nombre = b;
