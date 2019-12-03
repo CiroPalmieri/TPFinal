@@ -10,8 +10,12 @@ namespace Sk8ARG.Controllers
     public class BackOfficeController : Controller
     {
         // GET: BackOffice
-        public ActionResult Index()
+        public ActionResult Index(string palabra)
         {
+            if (palabra == "Cerrar")
+            {
+                Session["mail"] = null;
+            }
             if (Session["Login"]!=null)
             {
                 return View("ABM");
@@ -75,6 +79,7 @@ namespace Sk8ARG.Controllers
                 
             }
         }
+    
         public ActionResult ingresarSKP(string accion)
         {
             SkateParks SKP = new SkateParks();

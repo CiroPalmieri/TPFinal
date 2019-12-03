@@ -9,4 +9,11 @@
         <li><a href="@Url.Action("ABMS", "BackOffice", new { a = 2 })">Ropa</a></li>
         <li><a href="@Url.Action("ABMS", "BackOffice", new { a = 3 })">Hardware</a></li>
     </ul>
-</div>
+    @if (Session["mail"] != null)
+    {
+        <a href="@Url.Action(" Index", "Home" , new { palabra="Cerrar" })">Cerrar Sesion></a>
+    }
+
+    </div>
+
+

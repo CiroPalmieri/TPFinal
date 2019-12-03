@@ -17,6 +17,7 @@ namespace Sk8ARG.Controllers
             return View();
         }
 
+
         public ActionResult ViewSKP()
         {
           
@@ -61,7 +62,7 @@ namespace Sk8ARG.Controllers
         }
         public ActionResult DetalleRP(int idRopa)
         {
-            Hardware a = BD.TraerHW(idRopa);
+            Ropa a = BD.TraerRopa(idRopa);
             ViewBag.Rp = a;
             return View();
         }

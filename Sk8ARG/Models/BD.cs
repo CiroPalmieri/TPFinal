@@ -10,7 +10,7 @@ namespace Sk8ARG.Models
     {
         private static SqlConnection Conectar()
         {
-            string strConn = "Server = A-CVE-05; Database = TP PAGINA; User Id = alumno;Password = alumno;";
+            string strConn = "Server = A-CCE-08; Database = TP PAGINA; User Id = alumno;Password = alumno;";
             SqlConnection a = new SqlConnection(strConn);
             a.Open();
             return a;
@@ -252,7 +252,7 @@ namespace Sk8ARG.Models
             Consulta.CommandType = System.Data.CommandType.Text;
 
             string SQL = "UPDATE Ropa SET ";
-            SQL += "Nombre = '" + Ropita.Nombre + "', Foto='" + Ropita.Foto + "', " + "Descripcion= '" + Ropita.Descripcion + "', " + " Stock = " + Ropita.Stock + " WHERE IdRopa = " + Ropita.IdRopa;
+            SQL += "Nombre = '" + Ropita.Nombre + "', Foto='" + Ropita.Foto + "', " + "Descripcion= '" + Ropita.Descripcion + "', " + " Stock = " + Ropita.Stock + ", " + " Precio = '" + Ropita.Precio + "' WHERE IdRopa = " + Ropita.IdRopa;
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
@@ -263,7 +263,7 @@ namespace Sk8ARG.Models
             Consulta.CommandType = System.Data.CommandType.Text;
 
             string SQL = "UPDATE Hardware SET ";
-            SQL += "Nombre = '" + MiHW.Nombre + "', Foto='" + MiHW.Foto + "', " + "Descripcion= '" + MiHW.Descripcion + "', " + " Stock = " + MiHW.Stock + " WHERE IdHardware = " + MiHW.IdHW;
+            SQL += "Nombre = '" + MiHW.Nombre + "', Foto='" + MiHW.Foto + "', " + "Descripcion= '" + MiHW.Descripcion + "', " + " Stock = " + MiHW.Stock + ", " +  " Precio = '" + MiHW.Precio +  "' WHERE IdHardware = " + MiHW.IdHW;
             Consulta.CommandText = SQL;
             Consulta.ExecuteNonQuery();
         }
