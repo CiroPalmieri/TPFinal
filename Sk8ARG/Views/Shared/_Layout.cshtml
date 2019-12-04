@@ -1,4 +1,4 @@
-﻿
+﻿@using Sk8ARG.Models
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +18,16 @@
             </button>
             <a href="@Url.Action("Index","Home", new {@class = "navbar-brand" } )"><img src="~/Content/images/Sk8Blanco.png" /></a>
             <a href="@Url.Action("Index","BackOffice", new {@class = "navbar-brand" } )"><img src="~/Content/images/BOBlanco.png" /></a>
-          
+
+            @if (Session["Login"] != null)
+            {
+                <a href="@Url.Action("Index","Home", new {@class ="navbar-brand",palabra = "cerrar" })"><img src="~/Content/images/cerrarsesion.png"/> </a>
+            }
+            @if (Session["Login"] == null)
+            {
+                <a href="@Url.Action("Index","BackOffice", new {@class ="navbar-brand"})"><img src="~/Content/images/iniciarsesion.png"/> </a>
+
+            }
         </div>
     </div>
 </div>

@@ -8,8 +8,13 @@ namespace Sk8ARG.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+      
+        public ActionResult Index(string palabra)
         {
+            if (palabra == "cerrar")
+            {
+                Session["Login"] = null;
+            }
             SkateParks a = new SkateParks();
             a = BD.TraerDestSKP();
             ViewBag.Dou = a;
@@ -66,5 +71,6 @@ namespace Sk8ARG.Controllers
             ViewBag.Rp = a;
             return View();
         }
+       
     }
 }

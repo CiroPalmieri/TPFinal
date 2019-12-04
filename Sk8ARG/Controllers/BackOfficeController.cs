@@ -12,19 +12,17 @@ namespace Sk8ARG.Controllers
         // GET: BackOffice
         public ActionResult Index(string palabra)
         {
-            if (palabra == "Cerrar")
+            if(palabra=="cerrar")
             {
-                Session["mail"] = null;
-            }
-            if (Session["Login"]!=null)
-            {
-                return View("ABM");
-            }
-            else
-            {
-                return View();
-            }
+                Session["Login"] = null;
 
+            }         
+            if(Session["Login"] != null)
+                {
+               
+                return View("ABM");
+                }
+                return View();
         }
         public ActionResult ABMS(int a)
         {
